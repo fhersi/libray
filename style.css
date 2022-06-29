@@ -1,0 +1,52 @@
+body {
+	height: 100vh;
+}
+
+header {
+	display: grid;
+	grid-template-rows: 1fr 1fr;
+}
+.main-container {
+	display: flex;
+	height: 100vh;
+	flex: 1 1 auto;
+	flex-wrap: wrap;
+	justify-content: center;
+	align-items: center;
+}
+
+.book {
+	display: flex;
+	flex-direction: column;
+	border: 1px solid black;
+	width: fit-content;
+	margin: 5px;
+	padding: 5px;
+	border-radius: 5px;
+}
+
+span.title {
+	font-size: large;
+	font-weight: 600;
+	letter-spacing: 1px;
+	text-transform: capitalize;
+}
+
+span.author {
+	font-size: small;
+	font-style: italic;
+}
+
+span.pageInfo {
+	font-size: x-small;
+	font-style: italic;
+}
+
+span.status {
+}
+
+div.status {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
