@@ -19,14 +19,31 @@
 				<button class="createBook">+ add book</button>
 			</div>
 			<div class="main-container">
-				<div class="dummyBook book">
-					<span class="title">harry potter</span>
-					<span class="author">by JK Rowling</span>
-					<span class="pageInfo">256 Pages </span>
-					<div class="status">
-						<span class="status">read</span>
-					</div>
+				<div class="modal">
+					<form action="#">
+						<div class="form-input">
+							<label for="title"></label>
+							<input type="text" class="form-title" id="title" placeholder="Book Title">
+						</div>
+						<div class="form-input">
+							<label for="author"></label>
+							<input type="text" class="form-author" id="author" placeholder="Book Author">
+						</div>
+						<div class="form-input">
+							<label for="pageInfo"></label>
+							<input type="number" class="form-pageInfo" id="pageInfo" placeholder="130">
+						</div>
+						<div class="form-input">
+							<label for="read">Have You Read it?</label>
+							<input type="checkbox" class="form-read" id="read">
+						</div>
+						<div class="btn-modal">
+
+							<button class="create-book">create</button>
+						</div>
+					</form>
 				</div>
+				<div class="cards"></div>
 			</div>
 		</body>
 	</body>

@@ -6,7 +6,34 @@ header {
 	display: grid;
 	grid-template-rows: 1fr 1fr;
 }
+
 .main-container {
+	height: 100vh;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.modal {
+	display: flex;
+	flex-direction: column;
+	border: 1px solid black;
+	padding: 10px;
+	border-radius: 5%;
+	display: none; /* Hidden by default */
+	position: fixed; /* Stay in place */
+	overflow: auto;
+
+	background-color: rgb(0, 0, 0);
+	background-color: rgba(0, 0, 0, 0.4);
+}
+
+.btn-modal {
+	display: flex;
+	justify-content: center;
+}
+
+.cards {
 	display: flex;
 	height: 100vh;
 	flex: 1 1 auto;
