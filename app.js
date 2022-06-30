@@ -2,6 +2,7 @@ const divMainContainer = document.querySelector(".main-container");
 const divCards = document.querySelector(".cards");
 const btnAddBook = document.querySelector("button.createBook");
 const btnCreateBook = document.querySelector(".create-book");
+
 const modal = document.querySelector(".modal");
 
 btnCreateBook.addEventListener("click", () => {
@@ -61,6 +62,7 @@ const createBook = (book) => {
 
 	const div = createElementWithClass("div", name);
 	div.classList.add("book");
+	div.id = book.index;
 	const title = createElementWithClass("span", "title");
 	title.textContent = book.title;
 	div.appendChild(title);
@@ -74,6 +76,9 @@ const createBook = (book) => {
 	const bookStatus = createElementWithClass("span", "status");
 	bookStatus.textContent = book.status;
 	divStatus.appendChild(bookStatus);
+	const btnRemove = createElementWithClass("button", "btn-remove");
+	btnRemove.textContent = "remove book";
+	divStatus.appendChild(btnRemove);
 
 	div.appendChild(divStatus);
 
@@ -86,13 +91,47 @@ const formInput = () => {
 	let pageInfo = document.querySelector(".form-pageInfo").value;
 	let isRead = document.querySelector(".form-read").checked;
 
-	createBook(new Book(title, author, pageInfo, isRead));
+	let newBook = new Book(title, author, pageInfo, isRead);
+
+	let index = myLibrary.push(new Book(title, author, pageInfo, isRead)) - 1;
+
+	newBook.index = index;
+
+	console.log(newBook);
+	createBook(newBook);
+	btnRemoveAddEventListner();
+
+	//createBook(new Book(title, author, pageInfo, isRead));
 };
 
 const displayLibrary = () => {
 	for (const book in myLibrary) {
+		myLibrary[book].index = book;
 		createBook(myLibrary[book]);
 	}
 };
 
 displayLibrary();
+
+const btnRemoveAddEventListner = () => {
+	const btnRemoveBook = document.querySelectorAll(".btn-remove");
+	for (let btn of btnRemoveBook) {
+		btn.addEventListener("click", (e) => {
+			let index = e.path[2].id;
+			const element = document.getElementById(index);
+			element.remove();
+			myLibrary.splice(index, 1);
+
+			updateIndex();
+		});
+		//console.log(element);
+	}
+};
+
+const updateIndex = () => {
+	for (let book in myLibrary) {
+		document.getElementById(myLibrary[book].index).id = book;
+		myLibrary[book].index = book;
+	}
+	console.log(myLibrary);
+};
