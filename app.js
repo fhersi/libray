@@ -23,19 +23,37 @@ btnAddBook.addEventListener("click", () => {
 });
 
 let myLibrary = [];
-function Book(title, author, noPages, read) {
-	this.title = title;
-	this.author = author;
-	this.noPages = noPages;
-	this.read = read;
-	this.status = read ? "read" : "not read yet";
-}
+// function Book(title, author, noPages, read) {
+// 	this.title = title;
+// 	this.author = author;
+// 	this.noPages = noPages;
+// 	this.read = read;
+// 	this.status = read ? "read" : "not read yet";
+// }
 
-Book.prototype.info = () =>
-	`${this.title} by ${this.author}, ${this.noPages} pages, ${this.status}`;
+// Book.prototype.info = () =>
+// 	`${this.title} by ${this.author}, ${this.noPages} pages, ${this.status}`;
 
-function addBookToLibrary(book) {
-	myLibrary.push(book);
+// function addBookToLibrary(book) {
+// 	myLibrary.push(book);
+// }
+
+class Book {
+	constructor(title, author, noPages, read) {
+		this.title = title;
+		this.author = author;
+		this.noPages = noPages;
+		this.read = read;
+		this.status = read ? "read" : "not read yet";
+	}
+
+	info() {
+		`${this.title} by ${this.author}, ${this.noPages} pages, ${this.status}`;
+	}
+
+	addBookToLibrary() {
+		myLibrary.push(this);
+	}
 }
 
 const hobbit = new Book("hobbit", "JRR TOLKIEN", 256, false);
@@ -46,9 +64,14 @@ const threeBodyProblem = new Book(
 	500,
 	true
 );
-addBookToLibrary(hobbit);
-addBookToLibrary(harryPotter);
-addBookToLibrary(threeBodyProblem);
+
+// addBookToLibrary(hobbit);
+// addBookToLibrary(harryPotter);
+// addBookToLibrary(threeBodyProblem);
+
+hobbit.addBookToLibrary();
+harryPotter.addBookToLibrary();
+threeBodyProblem.addBookToLibrary();
 
 const createElementWithClass = (func, className) => {
 	const element = document.createElement(func);
@@ -104,15 +127,6 @@ const formInput = () => {
 	//createBook(new Book(title, author, pageInfo, isRead));
 };
 
-const displayLibrary = () => {
-	for (const book in myLibrary) {
-		myLibrary[book].index = book;
-		createBook(myLibrary[book]);
-	}
-};
-
-displayLibrary();
-
 const btnRemoveAddEventListner = () => {
 	const btnRemoveBook = document.querySelectorAll(".btn-remove");
 	for (let btn of btnRemoveBook) {
@@ -130,8 +144,22 @@ const btnRemoveAddEventListner = () => {
 
 const updateIndex = () => {
 	for (let book in myLibrary) {
-		document.getElementById(myLibrary[book].index).id = book;
+		let node = document.getElementById(myLibrary[book].index);
+		if (!node) {
+			continue;
+		}
+		node.id = book;
 		myLibrary[book].index = book;
 	}
 	console.log(myLibrary);
 };
+
+const displayLibrary = () => {
+	for (const book in myLibrary) {
+		myLibrary[book].index = book;
+		createBook(myLibrary[book]);
+	}
+	btnRemoveAddEventListner();
+};
+
+displayLibrary();
